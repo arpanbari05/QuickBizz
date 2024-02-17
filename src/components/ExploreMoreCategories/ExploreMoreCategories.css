@@ -1,0 +1,89 @@
+/* ExploreMoreCategoriesCarousel.css */
+
+.categories-carousel-container {
+  margin-top: 20px;
+  padding: 0 40px;
+}
+
+.explore-more-categories {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #3b5998;
+  margin-bottom: 10px;
+}
+
+.categories-carousel {
+  display: flex;
+  /* align-items: center; */
+  flex-direction: column;
+}
+
+.scrollable-categories-carousel {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.categories-nav-buttons {
+  display: flex;
+  margin-top: 10px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.categories-nav-button {
+  font-size: 1.5rem;
+  color: #3b5998;
+}
+
+/* Hide scrollbar for the horizontal scroll */
+.scrollable-categories-carousel::-webkit-scrollbar {
+  display: none;
+}
+/* ExploreMoreCategoriesCarousel.css */
+
+.categories-carousel-container {
+  margin-top: 20px;
+}
+
+.explore-more-categories {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #3b5998;
+  margin-bottom: 10px;
+}
+
+.categories-carousel {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.scrollable-categories-carousel {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.categories-nav-buttons {
+  display: flex;
+  margin-top: 10px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.categories-nav-button {
+  font-size: 1.5rem;
+  color: #3b5998;
+}
+
+/* Hide scrollbar for the horizontal scroll */
+.scrollable-categories-carousel::-webkit-scrollbar {
+  display: none;
+}

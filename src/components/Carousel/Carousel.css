@@ -1,0 +1,41 @@
+/* Carousel.css */
+
+.carousel-container {
+  margin-top: 20px;
+  padding: 40px;
+}
+
+.flash-sales {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #3b5998;
+  margin-bottom: 10px;
+}
+
+.carousel {
+  display: flex;
+  /* align-items: center; */
+  flex-direction: column;
+}
+
+.scrollable-carousel {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.nav-buttons {
+  display: flex;
+  margin-top: 10px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+
+/* Hide scrollbar for the horizontal scroll */
+.scrollable-carousel::-webkit-scrollbar {
+  display: none;
+}

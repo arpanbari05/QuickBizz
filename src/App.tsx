@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import CategoryPanel from "./components/CategoryPanel";
+import BrandPanel from "./components/BrandPanel";
+import Carousel from "./components/Carousel";
+import ExploreMoreCategoriesCarousel from "./components/ExploreMoreCategories";
+import Footer from "./components/Footer";
+import ExploreMoreProducts from "./components/ExploreMoreProducts";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar />
+      <div style={{ display: "flex" }}>
+        <CategoryPanel />
+        <BrandPanel />
+      </div>
+      <Carousel />
+      <ExploreMoreCategoriesCarousel />
+      <ExploreMoreProducts />
+      <Footer></Footer>
     </div>
   );
 }
