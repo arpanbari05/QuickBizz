@@ -1,6 +1,7 @@
 // ProductPage.tsx
 import React, { useState } from "react";
 import ExploreMoreProducts from "../ExploreMoreProducts";
+import { useNavigate } from "react-router-dom";
 
 const ProductPage: React.FC = () => {
   const product = {
@@ -14,6 +15,7 @@ const ProductPage: React.FC = () => {
 
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate();
 
   const handleSizeSelection = (size: string) => {
     setSelectedSize(size);
@@ -26,6 +28,7 @@ const ProductPage: React.FC = () => {
   const handleBuyNow = () => {
     // Implement your buy now logic here
     console.log(`Buying ${quantity} ${selectedSize} of ${product.name}`);
+    navigate("/cart");
   };
 
   return (

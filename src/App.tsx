@@ -13,6 +13,8 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import NotFound from "./components/404";
 import ProductPage from "./components/Product";
+import CartPage from "./components/Cart";
+import CheckoutPage from "./components/Checkout";
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/product" element={<ProductPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
