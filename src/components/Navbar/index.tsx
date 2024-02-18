@@ -24,30 +24,34 @@ const Navbar: React.FC = () => {
     navigate("/about", { replace: true });
   };
   return (
-    <nav className="navbar">
-      <div className="discount">Monsoon Sale For All Electronic And Free Express Delivery - OFF 50%!</div>
-      <div className="shop-button">
-        <button>Shop Now</button>
+    <div>
+      <div className="discount bg-orange-400 text-white text-center p-3">
+        Monsoon Sale For All Electronic And Free Express Delivery - OFF 50%!
       </div>
-      <div className="logo">QuickBizz</div>
-      <div className="nav-buttons">
-        <button className="nav-button" onClick={handleHome}>
-          Home
-        </button>
-        <button className="nav-button" onClick={handleContact}>
-          Contact
-        </button>
-        <button className="nav-button" onClick={handleAbout}>
-          About
-        </button>
-        <button className="nav-button" onClick={handelSignup}>
-          Signup
-        </button>
-      </div>
-      <div className="search-bar">
-        <input type="text" placeholder="Search" />
-      </div>
-    </nav>
+      <nav className="navbar">
+        <div className="shop-button">
+          <button>Shop Now</button>
+        </div>
+        <div className="logo">QuickBizz</div>
+        <div className="nav-buttons">
+          <button className="nav-button" onClick={handleHome}>
+            Home
+          </button>
+          <button className="nav-button" onClick={handleContact}>
+            Contact
+          </button>
+          <button className="nav-button" onClick={handleAbout}>
+            About
+          </button>
+          <button className="nav-button" onClick={handelSignup}>
+            Signup
+          </button>
+        </div>
+        <div className="search-bar">
+          <input type="text" placeholder="Search" />
+        </div>
+      </nav>
+    </div>
   );
 };
 
