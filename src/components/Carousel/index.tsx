@@ -11,8 +11,6 @@ const Carousel: React.FC = () => {
     { discount: 15, productName: "Product B", price: 40, rating: 4.0 },
     { discount: 30, productName: "Product C", price: 60, rating: 4.8 },
     { discount: 25, productName: "Product D", price: 45, rating: 4.2 },
-    { discount: 25, productName: "Product D", price: 45, rating: 4.2 },
-    { discount: 25, productName: "Product D", price: 45, rating: 4.2 },
     // Add more products as needed
   ];
 
