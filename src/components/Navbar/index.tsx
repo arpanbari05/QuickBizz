@@ -25,13 +25,14 @@ const Navbar: React.FC = () => {
   };
   return (
     <div>
-      <div className="discount bg-orange-400 text-white text-center p-3">
-        Monsoon Sale For All Electronic And Free Express Delivery - OFF 50%!
+      <div className="discount bg-black text-white text-center p-7">
+        <p className="d-inline-block mb-0">Monsoon Sale For All Electronic And Free Express Delivery - OFF 50%!</p>
+        <button className="ml-3">Shop Now</button>
       </div>
+
+
+      
       <nav className="navbar">
-        <div className="shop-button">
-          <button>Shop Now</button>
-        </div>
         <div className="logo">QuickBizz</div>
         <div className="nav-buttons">
           <button className="nav-button" onClick={handleHome}>

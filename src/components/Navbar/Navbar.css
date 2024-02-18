@@ -32,3 +32,18 @@
 .search-bar { background: transparent; /* Transparent background for search bar */ padding: 8; display: flex; items: center }
 
 .search-bar input { border: none; padding: 8px; border-radius: 4px; width: 200px; outline: none; font-size: 16px; text-decoration: underline; text-decoration-color: #ccc; /* Light gray underline color / text-underline-position: under; / Position the underline under the text */ }
+.discount {
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 7px;
+}
+
+.discount p {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.discount button {
+  margin-left: 10px; /* Adjust the value based on your preference */
+}
