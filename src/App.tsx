@@ -8,20 +8,39 @@ import Carousel from "./components/Carousel";
 import ExploreMoreCategoriesCarousel from "./components/ExploreMoreCategories";
 import Footer from "./components/Footer";
 import ExploreMoreProducts from "./components/ExploreMoreProducts";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import NotFound from "./components/404";
+import ProductPage from "./components/Product";
 
 function App() {
   return (
-    <div>
+    <Router>
       <Navbar />
-      <div style={{ display: "flex" }}>
-        <CategoryPanel />
-        <BrandPanel />
-      </div>
-      <Carousel />
-      <ExploreMoreCategoriesCarousel />
-      <ExploreMoreProducts />
-      <Footer></Footer>
-    </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <div style={{ display: "flex" }}>
+                <CategoryPanel />
+                <BrandPanel />
+              </div>
+              <Carousel />
+              <ExploreMoreCategoriesCarousel />
+              <ExploreMoreProducts />
+            </div>
+          }
+        />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/product" element={<ProductPage />} />
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
+    </Router>
   );
 }
 

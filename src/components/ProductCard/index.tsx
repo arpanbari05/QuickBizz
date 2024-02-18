@@ -2,6 +2,7 @@
 
 import React from "react";
 import "./ProductCard.css";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   discount: number;
@@ -16,8 +17,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
   rating,
 }) => {
+  const navigate = useNavigate();
+
+  const handleProductClick = () => {
+    navigate("/product");
+  };
   return (
-    <div className="product-card">
+    <button className="product-card" onClick={handleProductClick}>
       <div className="discount-badge">{discount}% OFF</div>
       <div className="product-image">
         <div className="icons">
@@ -30,7 +36,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <p className="price">${price}</p>
         <p className="rating">Rating: {rating}/5</p>
       </div>
-    </div>
+    </button>
   );
 };
 
