@@ -1,40 +1,69 @@
-// Footer.tsx
+import React from 'react';
+import './Footer.css';
 
-import React from "react";
-import "./Footer.css";
-
-const Footer: React.FC = () => {
+function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <div className="footer-section">
-          <h3>About Us</h3>
-          <p>
-            QuickBizz is your one-stop destination for all your shopping needs.
-            Explore a wide range of products from various categories and enjoy a
-            seamless shopping experience.
-          </p>
+        <div className="footer-item footer-subscribe">
+          <h3>Subscribe</h3>
+          <p>Get 10% off your first order</p>
+          <form className="footer-email-form">
+            <input type="email" placeholder="Enter your email" />
+            <button type="submit">Subscribe</button>
+          </form>
         </div>
-        <div className="footer-section">
-          <h3>Contact Us</h3>
-          <p>Email: info@quickbizz.com</p>
-          <p>Phone: +123 456 7890</p>
+
+        <div className="footer-item footer-support">
+          <h3>Support</h3>
+          <p>SPIT, Bhavan's campus, Andheri</p>
+          <p>help@QuickBizz.com</p>
+          <p>+91-9191919191</p>
         </div>
-        <div className="footer-section">
-          <h3>Quick Links</h3>
+
+        <div className="footer-item footer-account">
+          <h3>Account</h3>
           <ul>
-            <li>Home</li>
-            <li>Categories</li>
-            <li>Flash Sales</li>
-            <li>Explore More Categories</li>
+            <li>My Account</li>
+            <li>Login / Register</li>
+            <li>Cart</li>
+            <li>Wishlist</li>
+          </ul>
+        </div>
+
+        <div className="footer-item footer-quick-links">
+          <h3>Quick Link</h3>
+          <ul>
+            <li>Privacy Policy</li>
+            <li>Terms Of Use</li>
+            <li>FAQ</li>
+            <li>Contact</li>
           </ul>
         </div>
       </div>
-      <div className="footer-bottom">
-        <p>&copy; 2024 QuickBizz. All rights reserved.</p>
+
+      <div className="footer-download-app">
+        <p>Download App</p>
+        <p>Save $3 with App New User Only</p>
+        <button className="footer-download-app-button">
+          <span className="footer-download-app-text">GET IT ON</span>
+          <img
+            className="footer-download-app-icon"
+            src="path/to/google-play-badge.svg"
+            alt="Google Play"
+          />
+          <img
+            className="footer-download-app-icon"
+            src="path/to/app-store-badge.svg"
+            alt="App Store"
+          />
+        </button>
       </div>
+      <div className="footer-item footer-copyright">
+          <p>&copy; Copyright QuickBizz 2024. All right reserved</p>
+        </div>
     </footer>
   );
-};
+}
 
 export default Footer;

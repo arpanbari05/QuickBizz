@@ -5,43 +5,30 @@
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  background-color: white; /* White background */
-  color: #3b5998; /* Facebook Blue for text color */
+  background-color: rgb(255, 255, 255); /* White background */
+  color: #121212; /* Facebook Blue for text color */
   padding: 0 20px;
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
-  color: #3b5998; /* Facebook Blue */
+  color: #060606; /* Facebook Blue */
 }
 
 .nav-buttons {
+  border: none;
   display: flex;
 }
 
 .nav-button {
-  margin: 0 10px;
-  padding: 8px 12px;
-  background-color: #3b5998; /* Facebook Blue */
-  color: white;
+  margin: 0 15px;
+  padding: 8px 20px; /* Facebook Blue */
+  color: rgb(2, 2, 2);
   border: none;
-  border-radius: 4px;
   cursor: pointer;
 }
 
-.search-bar {
-  background-color: #f0f2f5; /* Light gray background for search bar */
-  padding: 8px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-}
+.search-bar { background: transparent; /* Transparent background for search bar */ padding: 8; display: flex; items: center }
 
-.search-bar input {
-  border: none;
-  padding: 8px;
-  border-radius: 4px;
-  width: 200px;
-  outline: none;
-}
+.search-bar input { border: none; padding: 8px; border-radius: 4px; width: 200px; outline: none; font-size: 16px; text-decoration: underline; text-decoration-color: #ccc; /* Light gray underline color / text-underline-position: under; / Position the underline under the text */ }

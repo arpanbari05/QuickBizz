@@ -6,7 +6,7 @@ import "./BrandPanel.css";
 import Havells from "../../assets/havells.png";
 
 const BrandPanel: React.FC = () => {
-  const brands = ["Brand A", "Brand B", "Brand C", "Brand D", "Brand E"];
+  const brands = ["Brand A", "Brand B", "Brand C", "Brand D"];
 
   return (
     <div className="brand-panel">

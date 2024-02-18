@@ -1,43 +1,73 @@
-/* Footer.css */
-
 .footer {
-  background-color: #333;
-  color: white;
-  padding: 20px 0;
+  background: linear-gradient(to right, #020202, #2e2e2e);
+  color: #fff;
+  padding: 2rem 2rem 4rem;
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .footer-content {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
 }
 
-.footer-section {
-  max-width: 300px;
+.footer-item {
+  flex: 1;
+  margin-right: 2rem;
 }
 
-h3 {
+.footer-title {
+  color: #fff;
   font-size: 1.2rem;
-  margin-bottom: 10px;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
-p {
+.footer-item p {
+  color: #ccc;
   font-size: 0.9rem;
-  margin-bottom: 5px;
+  margin-bottom: 1rem;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.footer-email-form {
+  display: flex;
+  margin-top: 1rem;
+  align-items: center;
+  padding: 0 1rem;
 }
 
-li {
-  margin-bottom: 5px;
+.footer-email-input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem 0 0 0.25rem;
+  background-color: #444;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.footer-email-button {
+  padding: 0.5rem 1rem;
+  background-color: #575757;
+  border: none;
+  border-radius: 0 0.25rem 0.25rem 0;
   cursor: pointer;
   font-size: 0.9rem;
 }
 
-.footer-bottom {
+.footer-item a:hover {
+  text-decoration: underline;
+}
+
+.footer-copyright{
   text-align: center;
-  margin-top: 20px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #FFFFFF;
 }
