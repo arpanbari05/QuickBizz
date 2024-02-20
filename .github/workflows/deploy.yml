@@ -12,11 +12,13 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          ref: main # Change this to your default branch if it's not 'main'
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: "20"
 
       - name: Install Dependencies
         run: npm install
