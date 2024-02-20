@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/QuickBizz/static/css/main.dd73f442.css",
+    "main.js": "/QuickBizz/static/js/main.95fa446e.js",
+    "static/js/453.5dd253b3.chunk.js": "/QuickBizz/static/js/453.5dd253b3.chunk.js",
+    "index.html": "/QuickBizz/index.html",
+    "main.dd73f442.css.map": "/QuickBizz/static/css/main.dd73f442.css.map",
+    "main.95fa446e.js.map": "/QuickBizz/static/js/main.95fa446e.js.map",
+    "453.5dd253b3.chunk.js.map": "/QuickBizz/static/js/453.5dd253b3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dd73f442.css",
+    "static/js/main.95fa446e.js"
+  ]
+}
