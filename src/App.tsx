@@ -8,7 +8,12 @@ import Carousel from "./components/Carousel";
 import ExploreMoreCategoriesCarousel from "./components/ExploreMoreCategories";
 import Footer from "./components/Footer";
 import ExploreMoreProducts from "./components/ExploreMoreProducts";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import NotFound from "./components/404";
@@ -22,8 +27,9 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Navigate to={"/QuickBizz"} />} />
         <Route
-          path="/"
+          path="/QuickBizz"
           element={
             <div>
               <div style={{ display: "flex" }}>
