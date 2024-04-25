@@ -19,12 +19,12 @@ const CategoryProducts: React.FC<CategoryProductsProps> = () => {
       setProducts(products);
     };
     fetch();
-  }, []);
+  }, [id]);
 
   if (!id) return null;
   return (
     <div>
-      <Carousel category={id} products={products} />
+      <Carousel hideViewButton showAll category={id} products={products} />
     </div>
   );
 };

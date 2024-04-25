@@ -5,18 +5,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "../../axios.config";
 import Product from "../../types/Product.type";
 import Carousel from "../Carousel";
+import ImageWithFallback from "../ImageWithFallback";
 
 const ProductPage: React.FC = () => {
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   const [product, setProduct] = useState<Product | null>(null);
   const { id } = useParams();
   const user = localStorage.getItem("user");
-
-  const handleSizeSelection = (size: string) => {
-    setSelectedSize(size);
-  };
 
   const handleQuantityChange = (amount: number) => {
     setQuantity((prevQuantity) => Math.max(1, prevQuantity + amount));
@@ -46,7 +42,7 @@ const ProductPage: React.FC = () => {
       }
     };
     fetch();
-  }, []);
+  }, [id]);
 
   if (!product) return <p>Loading</p>;
 
@@ -75,9 +71,9 @@ const ProductPage: React.FC = () => {
         {/* Big Image and Product Details */}
         <div className="flex-1 flex items-start">
           {/* Big Image */}
-          <img
-            src={
-              product.image ||
+          <ImageWithFallback
+            src={product.image}
+            fallbackSrc={
               "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="
             }
             alt={product.name}
@@ -85,7 +81,7 @@ const ProductPage: React.FC = () => {
           />
 
           {/* Product Details */}
-          <div className="flex flex-col">
+          <div className="flex flex-col mr-0 md:mr-64">
             <h1 className="text-3xl font-semibold mb-2">{product.name}</h1>
             <div className="flex items-center mb-2">
               {/* Rating */}

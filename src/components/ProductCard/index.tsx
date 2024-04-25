@@ -14,6 +14,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
   ratings,
   _id,
+  image,
 }) => {
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
@@ -72,9 +73,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
   for (let i = 0; i < 5 - ratings; i++) {
     ratingStars.push(<IoStarOutline size={20} />);
   }
+
+  const fallbackImage =
+    "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=";
   return (
-    <button className="w-full " onClick={handleProductClick}>
-      <div className="relative w-full h-[320px] bg-gray-100 rounded-md">
+    <button className="w-full" onClick={handleProductClick}>
+      <div
+        className="relative w-full h-[320px] rounded-md"
+        style={{
+          backgroundImage: `url(${image}), url(${fallbackImage})`,
+          backgroundSize: "cover",
+        }}
+      >
         {/* <div className="w-max absolute top-3 left-3 p-1 px-2 text-xs text-white rounded-sm bg-primary">
           {discount}% OFF
         </div> */}

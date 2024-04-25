@@ -18,6 +18,11 @@
   gap: 50px;
 }
 
+.carousel-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .scrollable-carousel {
   display: flex;
   overflow-x: scroll;
@@ -25,14 +30,6 @@
   gap: 20px;
   padding-bottom: 20px;
 }
-
-.nav-buttons {
-  display: flex;
-  margin-top: 10px;
-  gap: 10px;
-  cursor: pointer;
-}
-
 
 /* Hide scrollbar for the horizontal scroll */
 .scrollable-carousel::-webkit-scrollbar {

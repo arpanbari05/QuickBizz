@@ -24,7 +24,7 @@ const WishlistedProducts: React.FC<WishlistedProductsProps> = () => {
   return (
     <div>
       {products.length > 0 ? (
-        <Carousel category={"Wishlist"} products={products} />
+        <Carousel showAll hideViewButton category={"Wishlist"} products={products} />
       ) : (
         <h1 className="text-5xl my-6 mx-auto">Wishlist is empty!</h1>
       )}

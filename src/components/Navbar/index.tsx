@@ -23,6 +23,11 @@ const Navbar: React.FC = () => {
   const handleAbout = () => {
     navigate("/about", { replace: true });
   };
+
+  const handleWishlist = () => {
+    navigate("/wishlist", { replace: true });
+  };
+
   return (
     <div>
       <div className="discount bg-black text-white text-center p-7">
@@ -44,13 +49,17 @@ const Navbar: React.FC = () => {
           <button className="nav-button" onClick={handleAbout}>
             About
           </button>
+          <button className="nav-button" onClick={handleWishlist}>
+            Wishlist
+          </button>
           <button className="nav-button" onClick={handelSignup}>
             Signup
           </button>
         </div>
-        <div className="search-bar">
-          <input type="text" placeholder="Search" />
-        </div>
+        <input
+          placeholder="Search products"
+          className="bg-gray-200 text-gray-700 py-2 w-80 px-5 text-sm rounded-full focus:outline-1 focus:outline-gray-300"
+        />
       </nav>
     </div>
   );
