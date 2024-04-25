@@ -1,21 +1,18 @@
 // ProductPage.tsx
-import React, { useState } from "react";
-import ExploreMoreProducts from "../ExploreMoreProducts";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { baseUrl } from "../../axios.config";
+import Product from "../../types/Product.type";
+import Carousel from "../Carousel";
 
 const ProductPage: React.FC = () => {
-  const product = {
-    id: 1,
-    name: "Sample Product",
-    rating: 4.5,
-    price: 49.99,
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    sizes: ["XS", "S", "M", "L", "XL"],
-  };
-
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
+  const [product, setProduct] = useState<Product | null>(null);
+  const { id } = useParams();
+  const user = localStorage.getItem("user");
 
   const handleSizeSelection = (size: string) => {
     setSelectedSize(size);
@@ -26,16 +23,38 @@ const ProductPage: React.FC = () => {
   };
 
   const handleBuyNow = () => {
-    // Implement your buy now logic here
-    console.log(`Buying ${quantity} ${selectedSize} of ${product.name}`);
-    navigate("/cart");
+    try {
+      const res = axios.post(baseUrl + "/cart/add", {
+        product_id: product?._id,
+        user_id: user,
+        quantity,
+      });
+      navigate("/cart");
+    } catch (e) {}
   };
+
+  const [categoryProducts, setCategoryProducts] = useState<Product[]>([]);
+  useEffect(() => {
+    const fetch = async () => {
+      const product = await (await axios.get(baseUrl + "/products/" + id)).data;
+      setProduct(product);
+      if (product) {
+        const categoryProducts = (await (
+          await axios.get(baseUrl + "/products/category/" + product.category)
+        ).data) as Product[];
+        setCategoryProducts(categoryProducts);
+      }
+    };
+    fetch();
+  }, []);
+
+  if (!product) return <p>Loading</p>;
 
   return (
     <div>
       <div className="flex p-8">
         {/* Small Images */}
-        <div className="flex flex-col mr-8">
+        {/* <div className="flex flex-col mr-8">
           <img
             src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="
             alt={product.name}
@@ -51,13 +70,16 @@ const ProductPage: React.FC = () => {
             alt={product.name}
             className="w-32 h-32 rounded-lg shadow-md mb-2"
           />
-        </div>
+        </div> */}
 
         {/* Big Image and Product Details */}
         <div className="flex-1 flex items-start">
           {/* Big Image */}
           <img
-            src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="
+            src={
+              product.image ||
+              "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="
+            }
             alt={product.name}
             className="w-[35rem] h-[35rem] object-cover rounded-lg shadow-lg mr-8"
           />
@@ -69,7 +91,7 @@ const ProductPage: React.FC = () => {
               {/* Rating */}
               <div className="flex items-center mr-4">
                 <span className="text-yellow-500">&#9733;</span>
-                <span className="ml-1 text-gray-700">{product.rating}</span>
+                <span className="ml-1 text-gray-700">{product.ratings}</span>
               </div>
 
               {/* Price */}
@@ -79,7 +101,7 @@ const ProductPage: React.FC = () => {
             <p className="text-gray-600 mb-4">{product.description}</p>
 
             {/* Sizes */}
-            <div className="flex items-center space-x-2 mb-4">
+            {/* <div className="flex items-center space-x-2 mb-4">
               {product.sizes.map((size) => (
                 <button
                   key={size}
@@ -93,7 +115,7 @@ const ProductPage: React.FC = () => {
                   {size}
                 </button>
               ))}
-            </div>
+            </div> */}
 
             {/* Quantity Selector */}
             <div className="flex items-center mb-4">
@@ -116,7 +138,6 @@ const ProductPage: React.FC = () => {
             <button
               className="bg-blue-500 text-white p-2 mb-4 rounded-md"
               onClick={handleBuyNow}
-              disabled={!selectedSize}
             >
               Buy Now
             </button>
@@ -129,7 +150,7 @@ const ProductPage: React.FC = () => {
           </div>
         </div>
       </div>
-      <ExploreMoreProducts />
+      <Carousel category="Similar products" products={categoryProducts} />
     </div>
   );
 };

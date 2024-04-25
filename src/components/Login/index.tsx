@@ -1,11 +1,37 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router";
+import { baseUrl } from "../../axios.config";
+import Toast from "../Toast";
 
 const SignupForm: React.FC = () => {
+  const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<any>();
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.post(baseUrl + "/login", {
+        email_or_phone: emailOrPhone,
+        password: password,
+      });
+      navigate("/QuickBizz");
+      localStorage.setItem("user", res.data.user_id);
+    } catch (e) {
+      setError(e);
+    }
+  };
+
   return (
     <div className="p-12 pl-0 flex gap-8">
       <div className="bg-gray-200 flex-grow"></div>
       {/* <div className="bg-gray-100 flex items-center justify-center h-screen"> */}
+
       <div className="bg-white p-8 rounded shadow-md w-1/3">
+        {error && (
+          <Toast type="danger" message={error?.response?.data?.error} />
+        )}
         <h2 className="text-2xl font-semibold mb-6">Login</h2>
 
         {/* Email/Phone Input */}
@@ -21,6 +47,7 @@ const SignupForm: React.FC = () => {
             id="emailPhone"
             name="emailPhone"
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
+            onChange={(e) => setEmailOrPhone(e.target.value)}
           />
         </div>
 
@@ -37,11 +64,15 @@ const SignupForm: React.FC = () => {
             id="password"
             name="password"
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
         {/* Create Account Button */}
-        <button className="bg-blue-500 text-white p-2 rounded-md w-full">
+        <button
+          className="bg-blue-500 text-white p-2 rounded-md w-full"
+          onClick={handleSubmit}
+        >
           Login
         </button>
 

@@ -1,24 +1,26 @@
 // CategoryCard.tsx
 
 import React from "react";
+import { useNavigate } from "react-router";
 import "./CategoryCard.css";
 
 interface CategoryCardProps {
-  categoryName: string;
-  imageUrl: string;
+  name: string;
+  icon: JSX.Element;
 }
 
-const CategoryCard: React.FC<CategoryCardProps> = ({
-  categoryName,
-  imageUrl,
-}) => {
+const CategoryCard: React.FC<CategoryCardProps> = ({ name, icon }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/category/" + name);
+  };
   return (
-    <div className="category-card">
-      <div
-        className="category-image"
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      ></div>
-      <div className="category-name">{categoryName}</div>
+    <div
+      onClick={handleClick}
+      className="category-card flex items-center justify-center gap-4 flex-col w-full p-6 py-8 text-gray-800 hover:bg-primary active:bg-white hover:text-white"
+    >
+      <div className="text-center">{icon}</div>
+      <div className="category-name">{name}</div>
     </div>
   );
 };

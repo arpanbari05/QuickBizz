@@ -1,8 +1,6 @@
 /* CategoryCard.css */
 
 .category-card {
-  width: 150px;
-  padding: 10px;
   border-radius: 8px;
   border: 1px solid #ddd;
   overflow: hidden;
@@ -20,5 +18,4 @@
 .category-name {
   text-align: center;
   font-size: 0.9rem;
-  color: #555;
 }

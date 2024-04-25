@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
   };
 
   const handleHome = () => {
-    navigate("/", { replace: true });
+    navigate("/QuickBizz", { replace: true });
   };
 
   const handleContact = () => {
@@ -26,12 +26,12 @@ const Navbar: React.FC = () => {
   return (
     <div>
       <div className="discount bg-black text-white text-center p-7">
-        <p className="d-inline-block mb-0">Monsoon Sale For All Electronic And Free Express Delivery - OFF 50%!</p>
+        <p className="d-inline-block mb-0">
+          Monsoon Sale For All Electronic And Free Express Delivery - OFF 50%!
+        </p>
         <button className="ml-3">Shop Now</button>
       </div>
 
-
-      
       <nav className="navbar">
         <div className="logo">QuickBizz</div>
         <div className="nav-buttons">

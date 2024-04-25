@@ -1,13 +1,11 @@
 // CheckoutPage.tsx
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { baseUrl } from "../../axios.config";
+import useCart from "../../customHooks/useCart";
+import useUser from "../../customHooks/useUser";
 
 const CheckoutPage: React.FC = () => {
-  const cartItems = [
-    { id: 1, name: "Sample Product 1", price: 49.99, quantity: 2 },
-    { id: 2, name: "Sample Product 2", price: 29.99, quantity: 1 },
-    // Add more items as needed
-  ];
-
   const [billingDetails, setBillingDetails] = useState({
     name: "",
     companyName: "",
@@ -18,7 +16,28 @@ const CheckoutPage: React.FC = () => {
     emailAddress: "",
   });
 
-  const [paymentMode, setPaymentMode] = useState("bank");
+  const userId = localStorage.getItem("user");
+  const { cart, isLoading: isCartLoading } = useCart(userId);
+  const { user, isLoading: isUserLoading } = useUser(userId);
+  const [paymentMode, setPaymentMode] = useState("cod");
+
+  useEffect(() => {
+    setBillingDetails({
+      name: (user?.first_name || "") + " " + (user?.last_name || ""),
+      emailAddress: user?.email || "",
+      apartmentFloor: "",
+      companyName: "",
+      phoneNumber: user?.phone || "",
+      streetAddress: user?.address || "",
+      townCity: "",
+    });
+  }, [
+    user?.first_name,
+    user?.last_name,
+    user?.address,
+    user?.email,
+    user?.phone,
+  ]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -29,20 +48,27 @@ const CheckoutPage: React.FC = () => {
     setPaymentMode(mode);
   };
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     // Place order logic
     // This is just a placeholder, you should implement your order placement logic here
-    console.log("Placing order:", { billingDetails, paymentMode, cartItems });
+    const orderData = {
+      billing_details: billingDetails,
+      total_price: cart.total_price,
+      cart_items: cart.cart_items,
+      payment_mode: paymentMode,
+      user_id: userId,
+    };
+
+    try {
+      await axios.post(baseUrl + "/orders", orderData);
+      await axios.delete(baseUrl + "/cart/" + userId);
+      console.log("Ordered successfully");
+    } catch (e) {}
   };
 
-  // Calculate cart total
-  const calculateCartTotal = () => {
-    let total = 0;
-    cartItems.forEach((item) => {
-      total += item.price * item.quantity;
-    });
-    return total.toFixed(2);
-  };
+  if (isCartLoading || isUserLoading) return <p>Loading...</p>;
+
+  console.log({ billingDetails });
 
   return (
     <div className="flex p-8">
@@ -187,11 +213,11 @@ const CheckoutPage: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {cartItems.map((item) => (
-              <tr key={item.id} className="border-b">
+            {cart.cart_items.map((item) => (
+              <tr key={item._id} className="border-b">
                 <td className="py-4">{item.name}</td>
                 <td className="py-4">
-                  ${(item.price * item.quantity).toFixed(2)}
+                  ${(item.price * (item.quantity || 1)).toFixed(2)}
                 </td>
               </tr>
             ))}
@@ -200,7 +226,7 @@ const CheckoutPage: React.FC = () => {
 
         <div className="mb-4">
           <p className="text-lg font-semibold">
-            Cart Total: ${calculateCartTotal()}
+            Cart Total: ${cart.total_price}
           </p>
         </div>
 
@@ -211,11 +237,12 @@ const CheckoutPage: React.FC = () => {
             <input
               type="radio"
               value="bank"
-              checked={paymentMode === "bank"}
               onChange={() => handlePaymentModeChange("bank")}
               className="mr-2"
+              disabled
             />
-            Bank Transfer
+            Bank Transfer{" "}
+            <span className="text-red-600 text-sm">(Not available)</span>
           </label>
           <label className="flex items-center">
             <input
