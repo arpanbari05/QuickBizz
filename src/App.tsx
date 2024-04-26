@@ -11,6 +11,7 @@ import CategoryProducts from "./components/CategoryProducts";
 import WishlistedProducts from "./components/Wishlist/Wishlist";
 import PageWrapper from "./components/PageWrapper/PageWrapper";
 import Landing from "./components/Landing/Landing";
+import SearchPanel from "./components/SearchPanel";
 
 function App() {
   return (
@@ -92,6 +93,14 @@ function App() {
         element={
           <PageWrapper>
             <CategoryProducts />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/search"
+        element={
+          <PageWrapper hideNavbar>
+            <SearchPanel />
           </PageWrapper>
         }
       />

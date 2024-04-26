@@ -1,8 +1,7 @@
 // Navbar.tsx
 
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
-
 import { useNavigate } from "react-router-dom";
 
 const Navbar: React.FC = () => {
@@ -26,6 +25,10 @@ const Navbar: React.FC = () => {
 
   const handleWishlist = () => {
     navigate("/wishlist", { replace: true });
+  };
+
+  const handleShowSearchPanel = () => {
+    navigate("/search");
   };
 
   return (
@@ -56,10 +59,12 @@ const Navbar: React.FC = () => {
             Signup
           </button>
         </div>
-        <input
-          placeholder="Search products"
-          className="bg-gray-200 text-gray-700 py-2 w-80 px-5 text-sm rounded-full focus:outline-1 focus:outline-gray-300"
-        />
+        <button
+          className="bg-gray-200 text-gray-700 py-2 w-80 px-5 text-sm rounded-full hover:outline-1 hover:outline-gray-300 active:opacity-70"
+          onClick={handleShowSearchPanel}
+        >
+          Search products
+        </button>
       </nav>
     </div>
   );

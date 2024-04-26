@@ -8,7 +8,7 @@ import "./Carousel.css";
 
 interface CarouselProps {
   title?: string;
-  category: string;
+  category?: string;
   products: Product[];
   showAll?: boolean;
   hideViewButton?: boolean;
