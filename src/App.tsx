@@ -8,10 +8,12 @@ import CartPage from "./components/Cart";
 import CheckoutPage from "./components/Checkout";
 import About from "./components/About";
 import CategoryProducts from "./components/CategoryProducts";
-import WishlistedProducts from "./components/Wishlist/Wishlist";
+import WishlistedProducts from "./components/Account/Wishlist";
 import PageWrapper from "./components/PageWrapper/PageWrapper";
 import Landing from "./components/Landing/Landing";
 import SearchPanel from "./components/SearchPanel";
+import Account from "./components/Account";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -101,6 +103,22 @@ function App() {
         element={
           <PageWrapper hideNavbar>
             <SearchPanel />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/account/*"
+        element={
+          <PageWrapper>
+            <Account />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/contact"
+        element={
+          <PageWrapper>
+            <Contact />
           </PageWrapper>
         }
       />

@@ -8,4 +8,5 @@ export default interface Product {
   _id: string;
   category: string;
   quantity?: number;
+  sold_by?: string[];
 }

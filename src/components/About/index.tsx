@@ -50,7 +50,7 @@ const people = [
 ];
 const About: React.FC = () => {
   return (
-    <div className="p-44">
+    <div className="p-44 py-20">
       {/* about  */}
       <div className="flex gap-16">
         <div className="w-1/2">

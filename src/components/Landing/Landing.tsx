@@ -1,11 +1,10 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { baseUrl } from "../../axios.config";
 import BrandPanel from "../BrandPanel";
 import Carousel from "../Carousel";
 import CategoryPanel from "../CategoryPanel";
 import ExploreMoreCategoriesCarousel from "../ExploreMoreCategories";
-import PageWrapper from "../PageWrapper/PageWrapper";
 import Product from "../../types/Product.type";
 
 const Landing = () => {

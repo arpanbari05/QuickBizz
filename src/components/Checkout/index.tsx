@@ -226,7 +226,7 @@ const CheckoutPage: React.FC = () => {
 
         <div className="mb-4">
           <p className="text-lg font-semibold">
-            Cart Total: ${cart.total_price}
+            Cart Total: ${cart.total_price.toFixed(2)}
           </p>
         </div>
 

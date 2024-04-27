@@ -1,9 +1,10 @@
 // ProductPage.tsx
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { baseUrl } from "../../axios.config";
 import Product from "../../types/Product.type";
+import User from "../../types/User.type";
 import Carousel from "../Carousel";
 import ImageWithFallback from "../ImageWithFallback";
 
@@ -11,8 +12,26 @@ const ProductPage: React.FC = () => {
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   const [product, setProduct] = useState<Product | null>(null);
+  const [sellers, setSellers] = useState<User[]>([]);
   const { id } = useParams();
+  const [activeSeller, setActiveSeller] = useState("");
   const user = localStorage.getItem("user");
+
+  useEffect(() => {
+    const fetch = async () => {
+      if (product && product.sold_by?.length) {
+        const promises: Promise<AxiosResponse>[] = [];
+        product.sold_by?.forEach(async (seller) => {
+          const promise = axios.get(baseUrl + "/user/" + seller);
+          promises.push(promise);
+        });
+        const res = await Promise.all(promises);
+        const sellers = res.map((res) => res.data);
+        setSellers(sellers);
+      }
+    };
+    fetch();
+  }, [product]);
 
   const handleQuantityChange = (amount: number) => {
     setQuantity((prevQuantity) => Math.max(1, prevQuantity + amount));
@@ -20,10 +39,11 @@ const ProductPage: React.FC = () => {
 
   const handleBuyNow = () => {
     try {
-      const res = axios.post(baseUrl + "/cart/add", {
+      axios.post(baseUrl + "/cart/add", {
         product_id: product?._id,
         user_id: user,
         quantity,
+        seller: activeSeller
       });
       navigate("/cart");
     } catch (e) {}
@@ -91,7 +111,7 @@ const ProductPage: React.FC = () => {
               </div>
 
               {/* Price */}
-              <div className="text-xl font-semibold">${product.price}</div>
+              <div className="text-xl font-semibold">${product.price.toFixed(2)}</div>
             </div>
 
             <p className="text-gray-600 mb-4">{product.description}</p>
@@ -143,6 +163,25 @@ const ProductPage: React.FC = () => {
               <p className="text-green-500 mb-1">Free Delivery</p>
               <p className="text-gray-500">Return within 30 days for free</p>
             </div>
+
+            {sellers.length > 0 && (
+              <div className="mt-5">
+                <div className="flex gap-2 items-center">
+                  <p className="text-primary">Seller: </p>
+                  <select
+                    name="seller"
+                    id="seller"
+                    onChange={(e) => setActiveSeller(e.target.value)}
+                  >
+                    {sellers.map((seller) => (
+                      <option value={seller._id} key={seller._id}>
+                        {seller.first_name + " " + seller.last_name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

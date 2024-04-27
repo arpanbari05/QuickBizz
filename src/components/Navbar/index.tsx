@@ -1,13 +1,17 @@
 // Navbar.tsx
 
-import React, { useState } from "react";
+import React from "react";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
+import useUser from "../../customHooks/useUser";
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
+  const userId = localStorage.getItem("user");
+  const { user } = useUser(userId);
 
-  const handelSignup = () => {
+  const handleSignup = () => {
     navigate("/signup", { replace: true });
   };
 
@@ -31,33 +35,53 @@ const Navbar: React.FC = () => {
     navigate("/search");
   };
 
+  let routes = [
+    {
+      title: "Home",
+      onClick: handleHome,
+    },
+    {
+      title: "About",
+      onClick: handleAbout,
+    },
+    {
+      title: "Contact",
+      onClick: handleContact,
+    },
+  ];
+
+  const userRoutes = [
+    {
+      title: "Wishlist",
+      onClick: handleWishlist,
+    },
+  ];
+
+  const nonUserRoutes = [{ title: "Signup", onClick: handleSignup }];
+
+  if (user) {
+    routes = routes.concat(userRoutes);
+  } else {
+    routes = routes.concat(nonUserRoutes);
+  }
+
   return (
     <div>
       <div className="discount bg-black text-white text-center p-7">
-        <p className="d-inline-block mb-0">
+        <p className="d-inline-block mb-0 text-sm">
           Monsoon Sale For All Electronic And Free Express Delivery - OFF 50%!
         </p>
-        <button className="ml-3">Shop Now</button>
+        <button className="ml-5 underline">Shop Now</button>
       </div>
 
       <nav className="navbar">
         <div className="logo">QuickBizz</div>
         <div className="nav-buttons">
-          <button className="nav-button" onClick={handleHome}>
-            Home
-          </button>
-          <button className="nav-button" onClick={handleContact}>
-            Contact
-          </button>
-          <button className="nav-button" onClick={handleAbout}>
-            About
-          </button>
-          <button className="nav-button" onClick={handleWishlist}>
-            Wishlist
-          </button>
-          <button className="nav-button" onClick={handelSignup}>
-            Signup
-          </button>
+          {routes.map((route) => (
+            <button className="nav-button" onClick={route.onClick}>
+              {route.title}
+            </button>
+          ))}
         </div>
         <button
           className="bg-gray-200 text-gray-700 py-2 w-80 px-5 text-sm rounded-full hover:outline-1 hover:outline-gray-300 active:opacity-70"
@@ -65,6 +89,17 @@ const Navbar: React.FC = () => {
         >
           Search products
         </button>
+        {user && (
+          <button
+            className="flex gap-3 items-center ml-7 p-1 hover:bg-gray-100 active:opacity-70 rounded-lg"
+            onClick={() => navigate("/account", { replace: true })}
+          >
+            <div className="rounded-full w-10 h-10 bg-gray-200 text-gray-600 flex items-center justify-center">
+              <FaUser size={20} />
+            </div>
+            <div className="text-md">{user.first_name}</div>
+          </button>
+        )}
       </nav>
     </div>
   );

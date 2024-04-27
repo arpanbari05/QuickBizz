@@ -6,6 +6,7 @@ import { IoEyeOutline, IoStar, IoStarOutline } from "react-icons/io5";
 import ProductType from "../../types/Product.type";
 import axios from "axios";
 import { baseUrl } from "../../axios.config";
+import ImageWithFallback from "../ImageWithFallback";
 
 interface ProductCardProps extends ProductType {}
 
@@ -22,17 +23,19 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   useEffect(() => {
     const fetch = async () => {
-      const res = await axios.get(baseUrl + `/wishlist/check`, {
-        params: {
-          user_id: userId,
-          product_id: _id,
-        },
-      });
-      const isWishlisted = res.data.wishlist_status;
-      setLiked(isWishlisted);
+      if (userId) {
+        const res = await axios.get(baseUrl + `/wishlist/check`, {
+          params: {
+            user_id: userId,
+            product_id: _id,
+          },
+        });
+        const isWishlisted = res.data.wishlist_status;
+        setLiked(isWishlisted);
+      }
     };
     fetch();
-  }, []);
+  }, [_id, userId]);
 
   const handleAddToWishlist: React.MouseEventHandler<
     HTMLButtonElement
@@ -78,13 +81,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
     "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=";
   return (
     <button className="w-full" onClick={handleProductClick}>
-      <div
-        className="relative w-full h-[320px] rounded-md"
-        style={{
-          backgroundImage: `url(${image}), url(${fallbackImage})`,
-          backgroundSize: "cover",
-        }}
-      >
+      <div className="relative w-full rounded-md">
+        <ImageWithFallback src={image} fallbackSrc={fallbackImage} />
         {/* <div className="w-max absolute top-3 left-3 p-1 px-2 text-xs text-white rounded-sm bg-primary">
           {discount}% OFF
         </div> */}
