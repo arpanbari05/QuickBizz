@@ -1,8 +1,7 @@
 // Navbar.tsx
 
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
-
 import { useNavigate } from "react-router-dom";
 
 const Navbar: React.FC = () => {
@@ -13,7 +12,7 @@ const Navbar: React.FC = () => {
   };
 
   const handleHome = () => {
-    navigate("/", { replace: true });
+    navigate("/QuickBizz", { replace: true });
   };
 
   const handleContact = () => {
@@ -23,15 +22,24 @@ const Navbar: React.FC = () => {
   const handleAbout = () => {
     navigate("/about", { replace: true });
   };
+
+  const handleWishlist = () => {
+    navigate("/wishlist", { replace: true });
+  };
+
+  const handleShowSearchPanel = () => {
+    navigate("/search");
+  };
+
   return (
     <div>
       <div className="discount bg-black text-white text-center p-7">
-        <p className="d-inline-block mb-0">Monsoon Sale For All Electronic And Free Express Delivery - OFF 50%!</p>
+        <p className="d-inline-block mb-0">
+          Monsoon Sale For All Electronic And Free Express Delivery - OFF 50%!
+        </p>
         <button className="ml-3">Shop Now</button>
       </div>
 
-
-      
       <nav className="navbar">
         <div className="logo">QuickBizz</div>
         <div className="nav-buttons">
@@ -44,13 +52,19 @@ const Navbar: React.FC = () => {
           <button className="nav-button" onClick={handleAbout}>
             About
           </button>
+          <button className="nav-button" onClick={handleWishlist}>
+            Wishlist
+          </button>
           <button className="nav-button" onClick={handelSignup}>
             Signup
           </button>
         </div>
-        <div className="search-bar">
-          <input type="text" placeholder="Search" />
-        </div>
+        <button
+          className="bg-gray-200 text-gray-700 py-2 w-80 px-5 text-sm rounded-full hover:outline-1 hover:outline-gray-300 active:opacity-70"
+          onClick={handleShowSearchPanel}
+        >
+          Search products
+        </button>
       </nav>
     </div>
   );

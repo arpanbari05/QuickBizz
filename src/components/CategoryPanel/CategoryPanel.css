@@ -18,8 +18,3 @@
   color: #555;
   transition: color 0.3s ease;
 }
-
-.category-panel li:hover {
-  color: #3b5998;
-  font-weight: bold;
-}

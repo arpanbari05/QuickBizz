@@ -20,7 +20,9 @@ const CategoryPanel: React.FC = () => {
     <div className="category-panel">
       <ul>
         {categories.map((category, index) => (
-          <li key={index}>{category}</li>
+          <li className="hover:text-primary hover:font-normal" key={index}>
+            {category}
+          </li>
         ))}
       </ul>
     </div>

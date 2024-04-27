@@ -1,17 +1,15 @@
 // CartPage.tsx
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../../axios.config";
+import useCart from "../../customHooks/useCart";
 
 const CartPage: React.FC = () => {
-  const cartItems = [
-    { id: 1, name: "Sample Product 1", price: 49.99, quantity: 2 },
-    { id: 2, name: "Sample Product 2", price: 29.99, quantity: 1 },
-    // Add more items as needed
-  ];
-
   const [couponCode, setCouponCode] = useState("");
-  const [cartTotal, setCartTotal] = useState(0);
   const navigate = useNavigate();
+  const user = localStorage.getItem("user");
+  const { cart } = useCart(user);
 
   const handleQuantityChange = (item: any, amount: number) => {
     // Update quantity logic
@@ -35,23 +33,12 @@ const CartPage: React.FC = () => {
   };
 
   const handleReturnToShop = () => {
-    navigate("/");
+    navigate("/QuickBizz");
   };
 
-  // Calculate cart total
-  const calculateCartTotal = () => {
-    let total = 0;
-    cartItems.forEach((item) => {
-      total += item.price * item.quantity;
-    });
-    setCartTotal(total);
-  };
+  if (!cart) return <p>Loading...</p>;
 
-  // Calculate cart total on component mount and when cartItems change
-  React.useEffect(() => {
-    calculateCartTotal();
-  }, [cartItems]);
-
+  console.log({ cart });
   return (
     <div className="p-8">
       <h1 className="text-3xl font-semibold mb-6">Shopping Cart</h1>
@@ -67,15 +54,15 @@ const CartPage: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {cartItems.map((item) => (
-            <tr key={item.id} className="border-b">
+          {cart.cart_items.map((item) => (
+            <tr key={item._id} className="border-b">
               <td className="py-4">{item.name}</td>
               <td className="py-4">${item.price.toFixed(2)}</td>
               <td className="py-4">
                 <button
                   className="p-2 border rounded-l-md"
                   onClick={() => handleQuantityChange(item, -1)}
-                  disabled={item.quantity <= 1}
+                  disabled={(item.quantity || 1) <= 1}
                 >
                   -
                 </button>
@@ -88,7 +75,7 @@ const CartPage: React.FC = () => {
                 </button>
               </td>
               <td className="py-4">
-                ${(item.price * item.quantity).toFixed(2)}
+                ${(item.price * (item.quantity || 1)).toFixed(2)}
               </td>
             </tr>
           ))}
@@ -132,10 +119,10 @@ const CartPage: React.FC = () => {
         {/* Cart Summary */}
         <div className="ml-4 flex flex-col gap-4 border p-4">
           <p className="text-lg font-semibold mb-1">Cart Total:</p>
-          <p>Subtotal: ${cartTotal.toFixed(2)}</p>
+          <p>Subtotal: ${cart.total_price.toFixed(2)}</p>
           <p>Shipping Fee: $0.00</p>
           <p className="text-xl font-semibold">
-            Total: ${(cartTotal + 0).toFixed(2)}
+            Total: ${(cart.total_price + 0).toFixed(2)}
           </p>
 
           {/* Proceed to Checkout Button */}

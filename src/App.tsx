@@ -1,19 +1,5 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Navbar from "./components/Navbar";
-import CategoryPanel from "./components/CategoryPanel";
-import BrandPanel from "./components/BrandPanel";
-import Carousel from "./components/Carousel";
-import ExploreMoreCategoriesCarousel from "./components/ExploreMoreCategories";
-import Footer from "./components/Footer";
-import ExploreMoreProducts from "./components/ExploreMoreProducts";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import NotFound from "./components/404";
@@ -21,38 +7,106 @@ import ProductPage from "./components/Product";
 import CartPage from "./components/Cart";
 import CheckoutPage from "./components/Checkout";
 import About from "./components/About";
+import CategoryProducts from "./components/CategoryProducts";
+import WishlistedProducts from "./components/Wishlist/Wishlist";
+import PageWrapper from "./components/PageWrapper/PageWrapper";
+import Landing from "./components/Landing/Landing";
+import SearchPanel from "./components/SearchPanel";
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Navigate to={"/QuickBizz"} />} />
-        <Route
-          path="/QuickBizz"
-          element={
-            <div>
-              <div style={{ display: "flex" }}>
-                <CategoryPanel />
-                <BrandPanel />
-              </div>
-              <Carousel />
-              <ExploreMoreCategoriesCarousel />
-              <ExploreMoreProducts />
-            </div>
-          }
-        />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/product" element={<ProductPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/about" element={<About />} />
-
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <Routes>
+      <Route
+        path="/signup"
+        element={
+          <PageWrapper>
+            <Signup />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <PageWrapper>
+            <Login />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/"
+        element={
+          <PageWrapper>
+            <Landing />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/QuickBizz"
+        element={
+          <PageWrapper>
+            <Landing />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/product/:id"
+        element={
+          <PageWrapper>
+            <ProductPage />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/cart"
+        element={
+          <PageWrapper>
+            <CartPage />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/checkout"
+        element={
+          <PageWrapper>
+            <CheckoutPage />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/about"
+        element={
+          <PageWrapper>
+            <About />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/wishlist"
+        element={
+          <PageWrapper>
+            <WishlistedProducts />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/category/:id"
+        element={
+          <PageWrapper>
+            <CategoryProducts />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/search"
+        element={
+          <PageWrapper hideNavbar>
+            <SearchPanel />
+          </PageWrapper>
+        }
+      />
+      {/* If user is not logged in, redirect to login page */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 
