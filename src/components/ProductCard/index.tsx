@@ -7,19 +7,17 @@ import ProductType from "../../types/Product.type";
 import axios from "axios";
 import { baseUrl } from "../../axios.config";
 import ImageWithFallback from "../ImageWithFallback";
+import { imageBaseUrl } from "../../image.config";
 
-interface ProductCardProps extends ProductType {}
+interface ProductCardProps extends ProductType {
+  onClick?: (product: ProductType) => void;
+}
 
-const ProductCard: React.FC<ProductCardProps> = ({
-  name,
-  price,
-  ratings,
-  _id,
-  image,
-}) => {
+const ProductCard: React.FC<ProductCardProps> = ({ onClick, ...product }) => {
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
   const userId = localStorage.getItem("user");
+  const { _id, image, name, price, ratings } = product;
 
   useEffect(() => {
     const fetch = async () => {
@@ -66,7 +64,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   const handleProductClick = () => {
-    navigate("/product/" + _id);
+    if (onClick) {
+      onClick(product);
+    } else {
+      navigate("/product/" + _id);
+    }
   };
 
   const ratingStars = [];
@@ -80,16 +82,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const fallbackImage =
     "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=";
   return (
-    <button className="w-full" onClick={handleProductClick}>
+    <button className="w-full hover:shadow-md p-3" onClick={handleProductClick}>
       <div className="relative w-full rounded-md">
-        <ImageWithFallback src={image} fallbackSrc={fallbackImage} />
+        <ImageWithFallback
+          className="w-full h-[20vw] object-contain p-8"
+          src={image}
+          fallbackSrc={fallbackImage}
+        />
         {/* <div className="w-max absolute top-3 left-3 p-1 px-2 text-xs text-white rounded-sm bg-primary">
           {discount}% OFF
         </div> */}
         <div className="w-max flex flex-col absolute top-3 right-3 gap-2">
           {liked ? (
             <button
-              className="bg-white rounded-full p-1"
+              className="bg-white rounded-full p-1 text-primary"
               onClick={handleRemoveFromWishlist}
             >
               <IoMdHeart size={20} />

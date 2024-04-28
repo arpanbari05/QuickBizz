@@ -12,6 +12,7 @@ interface CarouselProps {
   products: Product[];
   showAll?: boolean;
   hideViewButton?: boolean;
+  onProductClick?: (product: Product) => void;
 }
 
 const Carousel: React.FC<CarouselProps> = (props) => {
@@ -40,7 +41,11 @@ const Carousel: React.FC<CarouselProps> = (props) => {
       </div>
       <div className="carousel-wrapper w-full gap-5">
         {products.map((product, index) => (
-          <ProductCard key={index} {...product} />
+          <ProductCard
+            key={index}
+            {...product}
+            onClick={props.onProductClick}
+          />
         ))}
       </div>
     </div>

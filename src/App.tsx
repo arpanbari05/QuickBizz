@@ -83,14 +83,6 @@ function App() {
         }
       />
       <Route
-        path="/wishlist"
-        element={
-          <PageWrapper>
-            <WishlistedProducts />
-          </PageWrapper>
-        }
-      />
-      <Route
         path="/category/:id"
         element={
           <PageWrapper>

@@ -29,17 +29,19 @@ const Landing = () => {
         <CategoryPanel />
         <BrandPanel />
       </div>
-      <Carousel
-        title="Today's"
-        category="Flash Sales"
-        products={saleProducts}
-      />
-      <ExploreMoreCategoriesCarousel />
-      <Carousel
-        title="This Month"
-        category="Best Selling Products"
-        products={bestSellingProducts}
-      />
+      <div className="p-16">
+        <Carousel
+          title="Today's"
+          category="Flash Sales"
+          products={saleProducts}
+        />
+        <ExploreMoreCategoriesCarousel />
+        <Carousel
+          title="This Month"
+          category="Best Selling Products"
+          products={bestSellingProducts}
+        />
+      </div>
     </div>
   );
 };

@@ -50,12 +50,7 @@ const Navbar: React.FC = () => {
     },
   ];
 
-  const userRoutes = [
-    {
-      title: "Wishlist",
-      onClick: handleWishlist,
-    },
-  ];
+  const userRoutes: any = [];
 
   const nonUserRoutes = [{ title: "Signup", onClick: handleSignup }];
 
