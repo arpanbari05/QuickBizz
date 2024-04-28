@@ -1,7 +1,8 @@
 // components/Orders.js
 
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../App";
 import { baseUrl } from "../../axios.config";
 import Order from "../../types/Order.type";
 import ListLoader from "../Loader/ListLoader";
@@ -9,7 +10,7 @@ import OrderItem from "../OrderItem";
 
 interface OrdersProps {}
 const Orders: React.FC<OrdersProps> = (props) => {
-  const userId = localStorage.getItem("user");
+  const { userId } = useContext(UserContext);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loader, setLoader] = useState(false);
 
@@ -31,9 +32,8 @@ const Orders: React.FC<OrdersProps> = (props) => {
     <div>
       <h2 className="text-xl text-primary mb-4">Orders</h2>
       {loader && <ListLoader />}
-      {orders.map((order) => (
-        <OrderItem order={order} />
-      ))}
+      {orders.length > 0 && orders.map((order) => <OrderItem order={order} />)}
+      {orders.length === 0 && <h2 className="text-xl">No orders yet</h2>}
     </div>
   );
 };

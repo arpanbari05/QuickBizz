@@ -38,6 +38,7 @@ const SearchPanel: React.FC<SearchPanelProps> = (props) => {
         <div className="w-full flex items-center rounded-full overflow-hidden">
           <div className="relative flex-grow">
             <input
+              autoFocus
               value={searchInput}
               placeholder="Search products"
               className="bg-gray-200 w-full text-gray-700 py-2 px-5 text-sm focus:outline-1 focus:outline-gray-300"

@@ -21,7 +21,7 @@ const useUser = (userId: string | null) => {
       }
     };
     fetch();
-  }, []);
+  }, [userId]);
 
   return { user, isLoading };
 };

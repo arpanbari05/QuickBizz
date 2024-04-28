@@ -1,6 +1,6 @@
 // ProductPage.tsx
 import axios, { AxiosResponse } from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoStar, IoStarOutline } from "react-icons/io5";
 import { PiTruckLight } from "react-icons/pi";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,6 +12,7 @@ import ImageWithFallback from "../ImageWithFallback";
 import { GrPowerCycle } from "react-icons/gr";
 import GridLoader from "../Loader/GridLoader";
 import DetailLoader from "../Loader/DetailLoader";
+import { UserContext } from "../../App";
 
 const ProductPage: React.FC = () => {
   const [quantity, setQuantity] = useState(1);
@@ -20,7 +21,7 @@ const ProductPage: React.FC = () => {
   const [sellers, setSellers] = useState<User[]>([]);
   const { id } = useParams();
   const [activeSeller, setActiveSeller] = useState("");
-  const user = localStorage.getItem("user");
+  const { userId } = useContext(UserContext);
   const [loader, setLoader] = useState(false);
   const [relatedProductLoader, setRelatedProductLoader] = useState(false);
 
@@ -49,7 +50,7 @@ const ProductPage: React.FC = () => {
     try {
       axios.post(baseUrl + "/cart/add", {
         product_id: product?._id,
-        user_id: user,
+        user_id: userId,
         quantity,
         seller: activeSeller,
       });

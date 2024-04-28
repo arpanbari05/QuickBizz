@@ -29,7 +29,7 @@ const Landing = () => {
         <CategoryPanel />
         <BrandPanel />
       </div>
-      <div className="p-16">
+      <div className="grid gap-16 p-16">
         <Carousel
           title="Today's"
           category="Flash Sales"

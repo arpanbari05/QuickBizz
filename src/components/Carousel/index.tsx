@@ -13,12 +13,16 @@ interface CarouselProps {
   showAll?: boolean;
   hideViewButton?: boolean;
   onProductClick?: (product: Product) => void;
+  itemCount?: number;
 }
 
 const Carousel: React.FC<CarouselProps> = (props) => {
   const [showAll, setShowAll] = useState(props.showAll);
+  const itemCount = props.itemCount || 5;
 
-  const products = !showAll ? props.products.slice(0, 4) : props.products;
+  const products = !showAll
+    ? props.products.slice(0, itemCount)
+    : props.products;
 
   return (
     <div className="carousel-container">
@@ -39,7 +43,10 @@ const Carousel: React.FC<CarouselProps> = (props) => {
           </button>
         )}
       </div>
-      <div className="carousel-wrapper w-full gap-5">
+      <div
+        className="grid w-full gap-5"
+        style={{ gridTemplateColumns: `repeat(${itemCount}, 1fr)` }}
+      >
         {products.map((product, index) => (
           <ProductCard
             key={index}

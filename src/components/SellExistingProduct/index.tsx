@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../App";
 import { baseUrl } from "../../axios.config";
 import Product from "../../types/Product.type";
 import Carousel from "../Carousel";
@@ -22,7 +23,7 @@ const SellExistingProduct = () => {
   const [category, setCategory] = useState(categories[0].value);
   const [products, setProducts] = useState<Product[]>([]);
   const [productToSell, setProductToSell] = useState<Product | null>(null);
-  const userId = localStorage.getItem("user");
+  const { userId } = useContext(UserContext);
   const [confirmLoader, setConfirmLoader] = useState(false);
 
   useEffect(() => {
@@ -95,6 +96,7 @@ const SellExistingProduct = () => {
         onProductClick={setProductToSell}
         showAll
         hideViewButton
+        itemCount={5}
       />
       {productToSell && (
         <Modal onClose={() => setProductToSell(null)}>

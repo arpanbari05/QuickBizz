@@ -1,7 +1,8 @@
 // components/MyAccount.js
 
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../App";
 import { baseUrl } from "../../axios.config";
 import useUser from "../../customHooks/useUser";
 
@@ -16,7 +17,7 @@ const MyAccount: React.FC<MyAccountProps> = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  const userId = localStorage.getItem("user");
+  const { userId } = useContext(UserContext);
   const { user } = useUser(userId);
 
   useEffect(() => {

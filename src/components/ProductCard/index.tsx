@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./ProductCard.css";
 import { useNavigate } from "react-router-dom";
 import { IoIosHeartEmpty, IoMdHeart } from "react-icons/io";
@@ -8,6 +8,7 @@ import axios from "axios";
 import { baseUrl } from "../../axios.config";
 import ImageWithFallback from "../ImageWithFallback";
 import { imageBaseUrl } from "../../image.config";
+import { UserContext } from "../../App";
 
 interface ProductCardProps extends ProductType {
   onClick?: (product: ProductType) => void;
@@ -16,7 +17,7 @@ interface ProductCardProps extends ProductType {
 const ProductCard: React.FC<ProductCardProps> = ({ onClick, ...product }) => {
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
-  const userId = localStorage.getItem("user");
+  const { userId } = useContext(UserContext);
   const { _id, image, name, price, ratings } = product;
 
   useEffect(() => {
@@ -93,24 +94,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ onClick, ...product }) => {
           {discount}% OFF
         </div> */}
         <div className="w-max flex flex-col absolute top-3 right-3 gap-2">
-          {liked ? (
-            <button
-              className="bg-white rounded-full p-1 text-primary"
-              onClick={handleRemoveFromWishlist}
-            >
-              <IoMdHeart size={20} />
-            </button>
-          ) : (
-            <button
-              className="bg-white rounded-full p-1"
-              onClick={handleAddToWishlist}
-            >
-              <IoIosHeartEmpty size={20} />
-            </button>
+          {userId && (
+            <React.Fragment>
+              {liked ? (
+                <button
+                  className="bg-white rounded-full p-1 text-primary"
+                  onClick={handleRemoveFromWishlist}
+                >
+                  <IoMdHeart size={20} />
+                </button>
+              ) : (
+                <button
+                  className="bg-white rounded-full p-1"
+                  onClick={handleAddToWishlist}
+                >
+                  <IoIosHeartEmpty size={20} />
+                </button>
+              )}
+            </React.Fragment>
           )}
-          <div className="bg-white rounded-full p-1">
+          {/* <div className="bg-white rounded-full p-1">
             <IoEyeOutline size={20} />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex flex-col items-start gap-1 py-2">

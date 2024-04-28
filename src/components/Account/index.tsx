@@ -1,4 +1,13 @@
-import { Outlet, Link, Routes, Route, useMatch } from "react-router-dom";
+import { useContext } from "react";
+import {
+  Outlet,
+  Link,
+  Routes,
+  Route,
+  useMatch,
+  useNavigate,
+} from "react-router-dom";
+import { UserContext } from "../../App";
 import ProductForm from "../ProductForm";
 import SellExistingProduct from "../SellExistingProduct";
 import MyAccount from "./MyAccount";
@@ -11,6 +20,8 @@ const Account = () => {
   const isWishlistActive = useMatch("/account/wishlist");
   const isSellProduct = useMatch("/account/sell-product");
   const isSellExistingProduct = useMatch("/account/sell-existing-product");
+  const userContext = useContext(UserContext);
+  const navigate = useNavigate();
 
   return (
     <div className="account-page flex gap-24 px-16 py-10">
@@ -52,6 +63,17 @@ const Account = () => {
             Sell Existing Product
           </Link>
         </div>
+
+        <button
+          className="bg-primary px-5 py-2 text-white rounded-sm hover:opacity-90 active:opacity-70 mt-16"
+          onClick={() => {
+            localStorage.removeItem("user");
+            userContext.setUserId(null);
+            navigate("/QuickBizz");
+          }}
+        >
+          Log out
+        </button>
       </div>
       <div className="content w-full p-20 py-10 shadow-lg">
         <Routes>

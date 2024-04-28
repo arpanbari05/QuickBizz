@@ -17,11 +17,6 @@
   gap: 50px;
 }
 
-.carousel-wrapper {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
 .scrollable-carousel {
   display: flex;
   overflow-x: scroll;

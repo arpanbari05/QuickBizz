@@ -1,14 +1,15 @@
 // Navbar.tsx
 
-import React from "react";
+import React, { useContext } from "react";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import useUser from "../../customHooks/useUser";
+import { UserContext } from "../../App";
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
-  const userId = localStorage.getItem("user");
+  const { userId } = useContext(UserContext);
   const { user } = useUser(userId);
 
   const handleSignup = () => {
@@ -25,10 +26,6 @@ const Navbar: React.FC = () => {
 
   const handleAbout = () => {
     navigate("/about", { replace: true });
-  };
-
-  const handleWishlist = () => {
-    navigate("/wishlist", { replace: true });
   };
 
   const handleShowSearchPanel = () => {
@@ -54,7 +51,7 @@ const Navbar: React.FC = () => {
 
   const nonUserRoutes = [{ title: "Signup", onClick: handleSignup }];
 
-  if (user) {
+  if (userId) {
     routes = routes.concat(userRoutes);
   } else {
     routes = routes.concat(nonUserRoutes);
@@ -84,7 +81,7 @@ const Navbar: React.FC = () => {
         >
           Search products
         </button>
-        {user && (
+        {user && userId && (
           <button
             className="flex gap-3 items-center ml-7 p-1 hover:bg-gray-100 active:opacity-70 rounded-lg"
             onClick={() => navigate("/account", { replace: true })}

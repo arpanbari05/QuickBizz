@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent, useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../App";
 import { baseUrl } from "../../axios.config";
 
 interface ProductFormState {
@@ -30,7 +31,7 @@ const ProductForm: React.FC = () => {
   const [discount, setDiscount] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState<File | null>(null);
-  const userId = localStorage.getItem("user");
+  const { userId } = useContext(UserContext);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>

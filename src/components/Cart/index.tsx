@@ -1,15 +1,16 @@
 // CartPage.tsx
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 import { baseUrl } from "../../axios.config";
 import useCart from "../../customHooks/useCart";
 
 const CartPage: React.FC = () => {
   const [couponCode, setCouponCode] = useState("");
   const navigate = useNavigate();
-  const user = localStorage.getItem("user");
-  const { cart } = useCart(user);
+  const { userId } = useContext(UserContext);
+  const { cart } = useCart(userId);
 
   const handleQuantityChange = (item: any, amount: number) => {
     // Update quantity logic

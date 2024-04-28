@@ -1,7 +1,8 @@
 // CheckoutPage.tsx
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { UserContext } from "../../App";
 import { baseUrl } from "../../axios.config";
 import useCart from "../../customHooks/useCart";
 import useUser from "../../customHooks/useUser";
@@ -18,7 +19,7 @@ const CheckoutPage: React.FC = () => {
     emailAddress: "",
   });
 
-  const userId = localStorage.getItem("user");
+  const { userId } = useContext(UserContext);
   const { cart, isLoading: isCartLoading } = useCart(userId);
   const { user, isLoading: isUserLoading } = useUser(userId);
   const [processingOrder, setProcessingOrder] = useState(false);
