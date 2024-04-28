@@ -76,9 +76,16 @@ const ProductForm: React.FC = () => {
         sold_by: [userId],
       };
       // Handle form submission here, e.g., send formData to backend
-      console.log(formData);
+
       try {
         await axios.post(baseUrl + "/products", formData);
+        alert("Your product was added successfully");
+        setName("");
+        setDescription("");
+        setCategory("");
+        setDiscount("");
+        setImage(null);
+        setPrice("");
       } catch (e) {
         console.error(e);
       }
