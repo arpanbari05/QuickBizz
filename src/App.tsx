@@ -14,6 +14,7 @@ import Landing from "./components/Landing/Landing";
 import SearchPanel from "./components/SearchPanel";
 import Account from "./components/Account";
 import Contact from "./components/Contact";
+import OrderPlaced from "./components/OrderPlaced";
 
 function App() {
   return (
@@ -111,6 +112,14 @@ function App() {
         element={
           <PageWrapper>
             <Contact />
+          </PageWrapper>
+        }
+      />
+      <Route
+        path="/order-placed"
+        element={
+          <PageWrapper>
+            <OrderPlaced onClose={() => {}} />
           </PageWrapper>
         }
       />

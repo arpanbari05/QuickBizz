@@ -1,9 +1,11 @@
 // CheckoutPage.tsx
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { baseUrl } from "../../axios.config";
 import useCart from "../../customHooks/useCart";
 import useUser from "../../customHooks/useUser";
+import OrderSuccess from "../OrderPlaced";
 
 const CheckoutPage: React.FC = () => {
   const [billingDetails, setBillingDetails] = useState({
@@ -19,7 +21,10 @@ const CheckoutPage: React.FC = () => {
   const userId = localStorage.getItem("user");
   const { cart, isLoading: isCartLoading } = useCart(userId);
   const { user, isLoading: isUserLoading } = useUser(userId);
+  const [processingOrder, setProcessingOrder] = useState(false);
   const [paymentMode, setPaymentMode] = useState("cod");
+  const [orderSucceded, setOrderSucceded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setBillingDetails({
@@ -60,18 +65,30 @@ const CheckoutPage: React.FC = () => {
     };
 
     try {
+      setProcessingOrder(true);
       await axios.post(baseUrl + "/orders", orderData);
       await axios.delete(baseUrl + "/cart/" + userId);
       console.log("Ordered successfully");
     } catch (e) {}
+    setProcessingOrder(false);
+    setOrderSucceded(true);
   };
 
   if (isCartLoading || isUserLoading) return <p>Loading...</p>;
 
-  console.log({ billingDetails });
-
   return (
     <div className="flex p-8">
+      {(processingOrder || orderSucceded) && (
+        <OrderSuccess
+          orderSucceded={orderSucceded}
+          placingOrder={processingOrder}
+          onClose={() => {
+            setOrderSucceded(false);
+            setProcessingOrder(false);
+            navigate("/account/orders");
+          }}
+        />
+      )}
       {/* Billing Details Form */}
       <div className="flex-1 mr-8">
         <h1 className="text-3xl font-semibold mb-6">Billing Details</h1>
