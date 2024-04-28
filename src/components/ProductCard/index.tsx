@@ -2,12 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import "./ProductCard.css";
 import { useNavigate } from "react-router-dom";
 import { IoIosHeartEmpty, IoMdHeart } from "react-icons/io";
-import { IoEyeOutline, IoStar, IoStarOutline } from "react-icons/io5";
+import { IoStar, IoStarOutline } from "react-icons/io5";
 import ProductType from "../../types/Product.type";
 import axios from "axios";
 import { baseUrl } from "../../axios.config";
 import ImageWithFallback from "../ImageWithFallback";
-import { imageBaseUrl } from "../../image.config";
 import { UserContext } from "../../App";
 
 interface ProductCardProps extends ProductType {

@@ -23,7 +23,7 @@ const CategoryProducts: React.FC<CategoryProductsProps> = () => {
 
   if (!id) return null;
   return (
-    <div>
+    <div className="px-16 py-10">
       <Carousel hideViewButton showAll category={id} products={products} />
     </div>
   );
