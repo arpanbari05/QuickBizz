@@ -1,3 +1,4 @@
+import React from "react";
 import { useContext } from "react";
 import {
   Outlet,
@@ -8,6 +9,8 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { UserContext } from "../../App";
+import NotFound from "../404";
+import Chat from "../Chat";
 import ProductForm from "../ProductForm";
 import SellExistingProduct from "../SellExistingProduct";
 import MyAccount from "./MyAccount";
@@ -62,6 +65,12 @@ const Account = () => {
           >
             Sell Existing Product
           </Link>
+          <Link
+            to="/account/messages"
+            className={isSellExistingProduct ? "text-primary" : ""}
+          >
+            Messages
+          </Link>
         </div>
 
         <button
@@ -77,14 +86,23 @@ const Account = () => {
       </div>
       <div className="content w-full p-20 py-10 shadow-lg">
         <Routes>
-          <Route path="/" element={<MyAccount />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="wishlist" element={<Wishlist />} />
-          <Route path="sell-product" element={<ProductForm />} />
-          <Route
-            path="sell-existing-product"
-            element={<SellExistingProduct />}
-          />
+          {!userContext.userId && <Route path="*" element={<NotFound />} />}
+          {userContext.userId && (
+            <React.Fragment>
+              <Route path="/" element={<MyAccount />} />
+              <Route path="orders" element={<Orders />} />
+              <Route path="wishlist" element={<Wishlist />} />
+              <Route path="sell-product" element={<ProductForm />} />
+              <Route
+                path="sell-existing-product"
+                element={<SellExistingProduct />}
+              />
+              <Route
+                path="messages"
+                element={<Chat userId={userContext.userId} />}
+              />
+            </React.Fragment>
+          )}
         </Routes>
         <Outlet />
       </div>
