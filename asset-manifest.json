@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/QuickBizz/static/css/main.666e3c0b.css",
-    "main.js": "/QuickBizz/static/js/main.19caa261.js",
+    "main.css": "/QuickBizz/static/css/main.cb761826.css",
+    "main.js": "/QuickBizz/static/js/main.60d4146a.js",
     "static/js/453.5dd253b3.chunk.js": "/QuickBizz/static/js/453.5dd253b3.chunk.js",
     "static/media/login-signup.png": "/QuickBizz/static/media/login-signup.6a106ff08ee2fc89ea53.png",
     "index.html": "/QuickBizz/index.html",
-    "main.666e3c0b.css.map": "/QuickBizz/static/css/main.666e3c0b.css.map",
-    "main.19caa261.js.map": "/QuickBizz/static/js/main.19caa261.js.map",
+    "main.cb761826.css.map": "/QuickBizz/static/css/main.cb761826.css.map",
+    "main.60d4146a.js.map": "/QuickBizz/static/js/main.60d4146a.js.map",
     "453.5dd253b3.chunk.js.map": "/QuickBizz/static/js/453.5dd253b3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.666e3c0b.css",
-    "static/js/main.19caa261.js"
+    "static/css/main.cb761826.css",
+    "static/js/main.60d4146a.js"
   ]
 }
