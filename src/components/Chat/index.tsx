@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import axios from "axios";
 import { baseUrl } from "../../axios.config";
+import { UserContext } from "../../App";
+import { IoSend } from "react-icons/io5";
 
 interface Message {
   _id: string;
@@ -9,9 +11,7 @@ interface Message {
   message: string;
 }
 
-interface ChatProps {
-  userId: string;
-}
+interface ChatProps {}
 
 interface RecentUser {
   id: string;
@@ -19,12 +19,14 @@ interface RecentUser {
   lastChat: string;
 }
 
-const Chat: React.FC<ChatProps> = ({ userId }) => {
+const Chat: React.FC<ChatProps> = () => {
   const [recentUsers, setRecentUsers] = useState<RecentUser[]>([]);
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const [selectedUserName, setSelectedUserName] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
+  const [searchInput, setSearchInput] = useState<string>("");
+  const { userId } = useContext(UserContext);
 
   const fetchRecentUsers = useCallback(() => {
     return new Promise<RecentUser[]>(async (resolve, reject) => {
@@ -112,58 +114,97 @@ const Chat: React.FC<ChatProps> = ({ userId }) => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex" }} className="flex h-[80vh]">
       <div
         style={{
-          flex: "1 1 30%",
-          borderRight: "1px solid #ccc",
-          padding: "10px",
+          width: "30%",
         }}
+        className="flex flex-col p-5"
       >
-        <h2>Recent Users</h2>
-        <ul>
-          {recentUsers.map((user) => (
-            <li
-              key={user.id}
-              onClick={() => {
-                setSelectedUser(user.id);
-                setSelectedUserName(user.name);
-              }}
-              style={{ cursor: "pointer" }}
-            >
-              <div className="flex gap-2 p-3 rounded-md">
-                <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
-                <div>
-                  <p className="font-semibold">{user.name}</p>
-                  <p className="text-sm text-ellipsis max-w-full text-gray-400">
-                    {user.lastChat}
-                  </p>
+        <h2 className="text-lg font-semibold text-gray-600 mb-4">Messages</h2>
+        <input
+          type="text"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          id="search-in-chat"
+          placeholder="Search in chat"
+          className="text-sm p-2 mb-4 rounded-sm bg-gray-100 text-gray-600 w-full focus:outline-none focus:outline-primary"
+        />
+        <div className="overflow-hidden max-w-full">
+          <ul>
+            {recentUsers.map((user) => (
+              <li
+                key={user.id}
+                onClick={() => {
+                  setSelectedUser(user.id);
+                  setSelectedUserName(user.name);
+                }}
+                style={{ cursor: "pointer" }}
+                className="text-gray-600 hover:font-normal hover:text-gray-600"
+              >
+                <div className="w-full flex gap-2 p-3 hover:bg-gray-100 rounded mb-1">
+                  <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+                  <div className="w-full">
+                    <p className="font-normal text-gray-800">{user.name}</p>
+                    <p
+                      className="text-sm w-full text-gray-400"
+                      style={{
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {user.lastChat}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <hr className="w-full" />
-            </li>
-          ))}
-        </ul>
+                <hr />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div style={{ flex: "1 1 70%", padding: "10px" }}>
+      <div style={{ width: "70%", padding: "10px" }} className="flex flex-col">
         {selectedUser && (
           <>
-            <h2>Chat with {selectedUserName}</h2>
-            <div style={{ maxHeight: "400px", overflowY: "scroll" }}>
+            <div className="flex items-center w-full p-3 px-5 gap-2">
+              <div className="rounded-full bg-gray-200 w-10 h-10"></div>
+              <div>{selectedUserName}</div>
+            </div>
+            <div className="overflow-x-hidden overflow-y-auto flex-grow px-7">
               {messages.map((msg) => (
-                <div key={msg._id}>
+                <div
+                  key={msg._id}
+                  className={`p-2 text-sm text-white bg-secondaryDark w-max mb-3`}
+                  style={{
+                    borderRadius:
+                      msg.sender_id === userId
+                        ? "10px 10px 0 10px"
+                        : "10px 10px 10px 0",
+                    marginLeft: msg.sender_id === userId ? "auto" : "0",
+                    marginRight: msg.sender_id !== userId ? "auto" : "0",
+                    maxWidth: "66.66%",
+                    overflowWrap: "break-word",
+                  }}
+                >
                   <p>{msg.message}</p>
                 </div>
               ))}
             </div>
-            <div>
+            <div className="flex w-full gap-3">
               <input
                 type="text"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Type your message..."
+                className="w-full bg-gray-100 rounded-md p-3 text-sm outline-none text-gray-600 focus:outline-none border border-transparent focus:border-secondaryDark"
               />
-              <button onClick={sendMessage}>Send</button>
+              <button
+                onClick={sendMessage}
+                className="bg-secondaryDark p-2 px-3 text-white rounded-md"
+              >
+                <IoSend size={20} />
+              </button>
             </div>
           </>
         )}

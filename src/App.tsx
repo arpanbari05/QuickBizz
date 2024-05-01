@@ -16,6 +16,7 @@ import Contact from "./components/Contact";
 import OrderPlaced from "./components/OrderPlaced";
 import { useState } from "react";
 import React from "react";
+import Chat from "./components/Chat";
 
 const UserContext = React.createContext<{
   userId: string | null;
@@ -117,6 +118,14 @@ function App() {
           element={
             <PageWrapper>
               <Account />
+            </PageWrapper>
+          }
+        />
+        <Route
+          path="/account/messages"
+          element={
+            <PageWrapper>
+              <Chat />
             </PageWrapper>
           }
         />

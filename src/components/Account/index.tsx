@@ -97,10 +97,6 @@ const Account = () => {
                 path="sell-existing-product"
                 element={<SellExistingProduct />}
               />
-              <Route
-                path="messages"
-                element={<Chat userId={userContext.userId} />}
-              />
             </React.Fragment>
           )}
         </Routes>
