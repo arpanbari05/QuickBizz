@@ -124,7 +124,7 @@ function App() {
         <Route
           path="/account/messages"
           element={
-            <PageWrapper>
+            <PageWrapper hideFooter>
               <Chat />
             </PageWrapper>
           }

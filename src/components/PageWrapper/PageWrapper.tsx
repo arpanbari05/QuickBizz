@@ -5,6 +5,7 @@ import Navbar from "../Navbar";
 interface PageWrapperProps {
   children: ReactNode;
   hideNavbar?: boolean;
+  hideFooter?: boolean;
 }
 
 const PageWrapper: React.FC<PageWrapperProps> = (props) => {
@@ -12,7 +13,7 @@ const PageWrapper: React.FC<PageWrapperProps> = (props) => {
     <React.Fragment>
       {!props.hideNavbar && <Navbar />}
       {props.children}
-      <Footer />
+      {!props.hideFooter && <Footer />}
     </React.Fragment>
   );
 };

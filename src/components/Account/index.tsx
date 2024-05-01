@@ -65,12 +65,7 @@ const Account = () => {
           >
             Sell Existing Product
           </Link>
-          <Link
-            to="/account/messages"
-            className={isSellExistingProduct ? "text-primary" : ""}
-          >
-            Messages
-          </Link>
+          <Link to="/account/messages">Messages</Link>
         </div>
 
         <button
