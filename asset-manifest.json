@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/QuickBizz/static/css/main.cb761826.css",
-    "main.js": "/QuickBizz/static/js/main.60d4146a.js",
+    "main.css": "/QuickBizz/static/css/main.c94ed201.css",
+    "main.js": "/QuickBizz/static/js/main.4cda2c59.js",
     "static/js/453.5dd253b3.chunk.js": "/QuickBizz/static/js/453.5dd253b3.chunk.js",
     "static/media/login-signup.png": "/QuickBizz/static/media/login-signup.6a106ff08ee2fc89ea53.png",
+    "static/media/grow.webp": "/QuickBizz/static/media/grow.6722b3a36d93856d10ef.webp",
     "index.html": "/QuickBizz/index.html",
-    "main.cb761826.css.map": "/QuickBizz/static/css/main.cb761826.css.map",
-    "main.60d4146a.js.map": "/QuickBizz/static/js/main.60d4146a.js.map",
+    "main.c94ed201.css.map": "/QuickBizz/static/css/main.c94ed201.css.map",
+    "main.4cda2c59.js.map": "/QuickBizz/static/js/main.4cda2c59.js.map",
     "453.5dd253b3.chunk.js.map": "/QuickBizz/static/js/453.5dd253b3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cb761826.css",
-    "static/js/main.60d4146a.js"
+    "static/css/main.c94ed201.css",
+    "static/js/main.4cda2c59.js"
   ]
 }
