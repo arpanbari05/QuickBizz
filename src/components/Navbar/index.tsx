@@ -60,10 +60,15 @@ const Navbar: React.FC = () => {
   return (
     <div>
       <div className="discount bg-black text-white text-center p-7">
-        <p className="d-inline-block mb-0 text-sm">
-          Monsoon Sale For All Electronic And Free Express Delivery - OFF 50%!
-        </p>
-        <button className="ml-5 underline">Shop Now</button>
+        <button
+          className="ml-5 underline mr-2"
+          onClick={() => {
+            window.scrollBy({ top: 550, behavior: "smooth" });
+          }}
+        >
+          Skip
+        </button>
+        <p className="d-inline-block mb-0 text-sm">to main content</p>
       </div>
 
       <nav className="navbar">

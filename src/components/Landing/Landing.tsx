@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { baseUrl } from "../../axios.config";
 import BrandPanel from "../BrandPanel";
 import Carousel from "../Carousel";
@@ -26,7 +26,7 @@ const Landing = () => {
   return (
     <div>
       <div className="flex">
-        <CategoryPanel />
+        {/* <CategoryPanel /> */}
         <BrandPanel />
       </div>
       <div className="grid gap-16 p-16">

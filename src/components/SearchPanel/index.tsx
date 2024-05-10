@@ -11,10 +11,21 @@ import { FaRegSadTear } from "react-icons/fa";
 
 interface SearchPanelProps {}
 
+const categories = [
+  { name: "Phones", value: "phones" },
+  { name: "Computers", value: "computers" },
+  { name: "SmartWatches", value: "smartwatches" },
+  { name: "Camera", value: "camera" },
+  { name: "HeadPhones", value: "headphones" },
+  { name: "Gaming", value: "gaming" },
+  // Add more categories as needed
+];
+
 const SearchPanel: React.FC<SearchPanelProps> = (props) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState<Product[] | null>(null);
+  const [category, setCategory] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +41,28 @@ const SearchPanel: React.FC<SearchPanelProps> = (props) => {
     };
     fetch();
   }, [searchQuery]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        if (category) {
+          const products = (
+            await axios.get(baseUrl + "/products/category/" + category)
+          ).data;
+          setProducts(products);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetch();
+  }, [category]);
+
+  const handleCategoryChange: React.ChangeEventHandler<HTMLSelectElement> = (
+    e
+  ) => {
+    setCategory(e.target.value);
+  };
 
   return (
     <div className="px-20 py-3 min-h-[100vh]">
@@ -68,6 +101,22 @@ const SearchPanel: React.FC<SearchPanelProps> = (props) => {
         <button onClick={() => navigate(-1)}>
           <IoClose size={20} />
         </button>
+      </div>
+      <div>
+        <div className="flex flex-col w-max my-7">
+          <label>Filter by Category:</label>
+          <select
+            name="category"
+            value={category}
+            onChange={handleCategoryChange}
+            className="py-2 text-sm px-5 bg-gray-100 rounded-sm text-gray-600 focus:outline-1 focus:outline-primary"
+          >
+            <option value="">Select</option>
+            {categories.map((category) => (
+              <option value={category.value}>{category.name}</option>
+            ))}
+          </select>
+        </div>
       </div>
       {products && products.length > 0 && (
         <Carousel products={products} hideViewButton showAll />
